@@ -1,0 +1,49 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layout/_AdminListLayout.cshtml";
+
+    // ViewBag.Title = "Home Page";
+}
+@model AP.SecuritySystem.Models.AdminUserVCModel
+<h1 class="text-light">@Model.Header.Title<span class="@Model.Header.Icon place-right"></span></h1>
+<hr class="thin bg-grayLighter">
+<button class="button primary"><span class="mif-user-plus"></span> Create...</button>
+<button class="button success"><span class="mif-user-check"></span> Change...</button>
+<!--<button class="button warning" onclick="pushMessage('warning')"><span class="mif-loop2"></span> Restart</button>-->
+<button class="button alert"><span class="mif-user-minus"></span> Remove...</button>
+<hr class="thin bg-grayLighter">
+<div class="listview-outlook" style="overflow-y: auto;" data-role="listview">
+    @foreach (var user in Model.Users)
+            {
+        <div class="list">
+
+            <div class="list-content" id="@user.User.Id">
+                <span class="list-title">@user.User.UserName</span>
+                <span class="list-subtitle">@user.User.Email</span>
+                <span class="list-remark">
+
+                    @{ var roles = "roles: ";
+                        foreach (var role in @user.AssignedRoles)
+                        {
+                            roles += @role.Name + ",";
+                        }
+                        <text>@roles.Remove(roles.Length - 1, 1)</text>
+                    }
+
+                </span>
+            </div>
+        </div>
+                        }
+</div>
+@Html.Hidden("editUrl", @Html.Raw(@Url.Action("UserEdit", "Admin", new { id = "UID" })))
+@Html.Hidden("deleteUrl", @Url.Action("UserDelete", "Account"))
+<div class="dialog padding20 alert" data-role="dialog" id="confirmDialog" data-close-button="true">
+    <h1>Delete confirmation!</h1>
+    <p>
+        Are you sure you want to delete this record?
+
+    </p>
+    <button class="button alert block-shadow-error">Delete</button>
+</div>

@@ -1,0 +1,154 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+// ViewBag.Title = "Home Page";
+}
+@{
+    @model AP.SecuritySystem.Models.EntryModel
+    var id = -1;
+    var caption = "";
+    var description = "";
+    var noe = "";
+    var enterRay = "";
+    var exitRay = "";
+    var enterCam = "";
+    var exitCam = "";
+    var upCam = "";
+    var enterDelay = "";
+    var exitDelay = "";
+    var rayType = false;
+    var server = -1;
+    @if (Model.Entry == null)
+    {
+        caption = "Create new entry";
+    }
+    else
+    {
+        id = Model.Entry.Id;
+        caption = "Edit entry";
+        description = Model.Entry.Description;
+        noe = Model.Entry.NoE.ToString();
+        enterRay = Model.Entry.EnterRay.ToString();
+        exitRay = Model.Entry.ExitRay.ToString();
+        rayType = Model.Entry.RaysType;
+        enterCam = Model.Entry.EnterCamera.ToString();
+        exitCam = Model.Entry.ExitCamera.ToString();
+        upCam = Model.Entry.UpCamera.ToString();
+        enterDelay = Model.Entry.EnterDelay.ToString();
+        exitDelay = Model.Entry.ExitDelay.ToString();
+    }
+
+}
+<h1 class="text-light">@caption<span class="mif-user-plus place-right"></span></h1>
+<hr class="thin bg-grayLighter">
+<script src="~/js/aplist.js"></script>
+        <div class="cell block-shadow-impact padding20">
+            <form method="post" action="@Url.Action("EntryEdit", "Admin")" id="editEntryForm" data-entryId="@id">
+                <div class="grid">
+                    <div class="row cells2">
+                        <div class="cell">
+                            <div class="input-control text" data-role="input">
+                                <label for="inputEntryname">Please enter entryname</label>
+                                <input type="text" id="inputEntryname" value="@description">
+                            </div>
+                            <br />
+                            <br />
+                            <div class="input-control select">
+                                <label for="selectServer">Select server</label>
+                                <select id="selectServer" data-mode="@server">
+                                    @foreach (var serverId in Model.Servers)
+                                    {
+                                        <option value="@serverId.Id">@serverId.Description</option>
+                                    }
+                                </select>
+                            </div>
+                            <br />
+                            <br />
+                            <div class="input-control select">
+                                <label for="selectType">Select type</label>
+                                <select id="selectType">
+                                    @if (rayType)
+                                    {
+                                    <option value="false">OFF</option>
+                                    <option value="true" selected>ON</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="false" selected>OFF</option>
+                                        <option value="true">ON</option>
+                                    }
+                                </select>
+                            </div>
+                            <br />
+                            <br />
+
+
+                            <div class="input-control number" data-role="input">
+                                <label for="inputNoe">Please enter Entry number</label>
+                                <input type="number" id="inputNoe" value="@noe">
+                            </div>
+                            <br />
+                            <br />
+                            <div class="input-control number" data-role="input">
+                                <label for="inputEnterray">Please enter enter ray</label>
+                                <input type="number" id="inputEnterray" min="0" max="100" step="1" value="@enterRay">
+                            </div>
+                            <br />
+                            <br />
+                            <div class="input-control number" data-role="input">
+                                <label for="inputExitray">Please enter exit ray</label>
+                                <input type="number" id="inputExitray" value="@exitRay">
+                            </div>
+                        </div>
+                        <div class="cell">
+                            <div class="input-control number" data-role="input">
+                                <label for="inputEnterCam">Please input Enter camera</label>
+                                <input type="number" id="inputEnterCam" value="@enterCam">
+                            </div>
+                            <br />
+                            <br />
+
+                            <div class="input-control number" data-role="input">
+                                <label for="inputExitCam">Please input Exit camera</label>
+                                <input type="number" id="inputExitCam" value="@exitCam">
+                            </div>
+                            <br />
+                            <br />
+
+                            <div class="input-control number" data-role="input">
+                                <label for="inputUpCam">Please input Up camera</label>
+                                <input type="number" id="inputUpCam" value="@upCam">
+                            </div>
+                            <br />
+                            <br />
+
+                            <div class="input-control number" data-role="input">
+                                <label for="inputEnterDelay">Please input Enter delay</label>
+                                <input type="number" id="inputEnterDelay" value="@enterDelay">
+                            </div>
+                            <br />
+                            <br />
+
+                            <div class="input-control number" data-role="input">
+                                <label for="inputExitDelay">Please input Exit delay</label>
+                                <input type="number" id="inputExitDelay" value="@exitDelay">
+                            </div>
+                            <br />
+                            <br />
+
+                        </div>
+
+                    </div>
+                    <div class="row form-actions">
+                        <hr class="thin bg-grayLighter">
+                        <button type="submit" class="button success" id="buttonSubmit"><span class="mif-user-plus"></span> Apply</button>
+                        <button type="button" class="button link" id="cancel">Cancel</button>
+                    </div>
+
+                </div>
+            </form>
+
+    </div>
+
+

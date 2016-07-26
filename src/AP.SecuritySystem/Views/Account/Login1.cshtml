@@ -1,0 +1,81 @@
+﻿@model AP.SecuritySystem.Models.LoginViewModel
+
+@{
+    Layout = "~/Views/Layout/_LoginView.cshtml";
+    ViewBag.Title = "Log In";
+}
+
+
+
+<section class="loginform cf">
+    <form name="login" action="~/Account/Login" method="post" accept-charset="utf-8">
+        <fieldset>
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            <legend>Authentication</legend>
+            <ul>
+                <li>
+                    <label for="UserName">Login</label>
+                    <input name="UserName" placeholder="username" required>
+                </li>
+                <li>
+                    <label for="Password">Password</label>
+                    <input name="Password" type="password" placeholder="password" required>
+                </li>
+                <li>
+
+
+                    <input type="submit" value="Login">
+                </li>
+                <li>
+                    <label for="RememberMe">Remember Me?</label>
+                    <input type="checkbox" name="RememberMe" placeholder="Remember me?"/>
+
+
+                </li>
+            </ul>
+        </fieldset>
+    </form>
+</section>
+
+
+
+
+
+<!--
+
+
+<div class="login-form-outer">
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Use a Local Account to log in.</h4>
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserName, new { @class = "col-md-4 control-label" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-4 control-label" })
+            <div class="col-md-8">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-7">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe)
+                </div>
+            </div>
+            <div class="pull-right col-md-4">
+                <input type="submit" value="Log in" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+    -->

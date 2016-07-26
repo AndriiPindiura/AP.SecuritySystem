@@ -1,0 +1,35 @@
+﻿ol {
+        list-style-type: none;
+        width: 400px;
+} 
+
+ li {
+        border: 1px dotted #999;
+        border-width: 1px 0;
+        margin: 5px 0;
+}
+
+ li a { 
+        color: #990000;
+        display: block;
+        font: bold 120% Arial, Helvetica, sans-serif;
+        padding: 5px;
+        text-decoration: none;
+}
+
+ li a:hover {
+        background: #ffffcc;
+}
+
+a em { 
+        color: #333;
+        display: block;
+        font: normal 85% Verdana, Helvetica, sans-serif;
+        line-height: 125%; 
+}
+
+a span {
+        color: #125F15;
+        font: normal 70% Verdana, Helvetica, sans-serif;
+        line-height: 150%;
+}

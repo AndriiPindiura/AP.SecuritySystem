@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+// ViewBag.Title = "Home Page";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AP.RMA</title>
+    <link rel="stylesheet" href="~/css/login.css">
+</head>
+<body>
+    <section class="loginform cf">
+        <form name="login" action="~/Account/SignIn" method="post" accept-charset="utf-8">
+            <fieldset>
+                <legend>Authentication</legend>
+                <ul>
+                    <li>
+                        <label for="login">Login</label>
+                        <input name="Login" placeholder="username" required>
+                    </li>
+                    <li>
+                        <label for="password">Password</label>
+                        <input name="Hash" type="password" placeholder="password" required>
+                    </li>
+                    <li>
+                        <input type="submit" value="Login">
+                    </li>
+                </ul>
+            </fieldset>
+        </form>
+    </section>
+</body>
+</html>

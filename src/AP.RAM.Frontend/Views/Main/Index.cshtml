@@ -1,0 +1,16 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model  AP.RMA.Frontend.CA.Models.LoginModel
+    // ViewBag.Title = "Home Page";
+}
+Welcome @Model.Fullname
+<br />
+UserID is: @Model.Uid
+<br />
+@if (@Model.IsAdmin)
+{
+    <p> User is Admin </p>
+}
+<a href="~/Account/SignOut">SignOut</a>

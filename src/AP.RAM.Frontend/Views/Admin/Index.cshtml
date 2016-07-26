@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model AP.RMA.Frontend.CA.Models.AdminViewModel
+
+
+@{
+    // ViewBag.Title = "Home Page";
+}
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/admin.css">
+</head>
+<body>
+    <ol>
+        @foreach (AP.RMA.Frontend.Models.LoginModel users in Model.Users)
+        {
+            <li>
+                <div style="float:right">
+                    <a href="~/Account/Edit/@users.Uid">@users.Fullname</a>
+                    <a href="~/Account/Delete/@users.Uid">remove</a>
+                </div>
+            </li>
+        }
+    </ol>
+    <br />
+    <ol>
+        @foreach (AP.RMA.Frontend.Models.CoreModel cores in Model.Cores)
+        {
+            <li>@cores.Description</li>
+
+        }
+    </ol>
+</body>
+</html>

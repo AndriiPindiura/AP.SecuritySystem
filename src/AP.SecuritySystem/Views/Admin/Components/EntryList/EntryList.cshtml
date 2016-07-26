@@ -1,0 +1,45 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layout/_AdminListLayout.cshtml";
+    // ViewBag.Title = "Home Page";
+}
+@model IQueryable<AP.SecuritySystem.Models.Entry>
+<h1 class="text-light">Entries<span class="mif-truck place-right"></span></h1>
+<hr class="thin bg-grayLighter">
+<button class="button primary"><span class="mif-truck2"></span> Create...</button>
+<button class="button success"><span class="mif-cogs"></span> Change...</button>
+<!--<button class="button warning" onclick="pushMessage('warning')"><span class="mif-loop2"></span> Restart</button>-->
+<button class="button alert"><span class="mif-minus"></span> Remove...</button>
+<hr class="thin bg-grayLighter">
+<div class="listview-outlook" style="overflow-y: auto;" data-role="listview">
+    @foreach (var entry in Model)
+            {    <div class="list">
+
+        <div class="list-content" id="@entry.Id">
+            <span class="list-title">@entry.Description</span>
+            <span class="list-subtitle">@entry.Server.Description</span>
+            <span class="list-remark">@string.Format("/rays: {0},{1}/ /cameras: {2},{3},{4}/ /mode: {5}/",
+                                     entry.EnterRay, entry.ExitRay,
+                                     entry.EnterCamera, entry.ExitCamera, entry.UpCamera,
+                                     entry.RaysType ? "ON":"OFF"
+                                     )</span>
+        </div>
+    </div>
+
+    }
+
+</div>
+@Html.Hidden("editUrl", @Html.Raw(@Url.Action("EntryEdit", "Admin", new { id = "UID" })))
+@Html.Hidden("deleteUrl", Url.Action("EntryDelete", "Admin"))
+<input id="serverId" value="@ViewBag.ServerId" type="hidden"/>
+<div class="dialog padding20 alert" data-role="dialog" id="confirmDialog" data-close-button="true">
+    <h1>Delete confirmation!</h1>
+    <p>
+        Are you sure you want to delete this entry?
+
+    </p>
+    <button class="button alert block-shadow-error">Delete</button>
+</div>
+

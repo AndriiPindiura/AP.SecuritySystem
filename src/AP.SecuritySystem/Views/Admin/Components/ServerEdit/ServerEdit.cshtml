@@ -1,0 +1,127 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+// ViewBag.Title = "Home Page";
+}
+@{
+    @model AP.SecuritySystem.Models.ServerModel
+    var id = -1;
+    var caption = "";
+    var description = "";
+    var ip = "";
+    var connectionstring = "";
+    var itv = "";
+    var mode = -1;
+    @if (Model.Server == null)
+    {
+        caption = "Create new server";
+    }
+    else
+    {
+        id = Model.Server.Id;
+        caption = "Edit server";
+        description = Model.Server.Description;
+        ip = Model.Server.Ip;
+        connectionstring = Model.Server.ConnectionString;
+        itv = Model.Server.ItvName;
+        mode = Model.Server.Mode;
+    }
+
+}
+<h1 class="text-light">@caption<span class="mif-user-plus place-right"></span></h1>
+<hr class="thin bg-grayLighter">
+<script src="~/js/aplist.js"></script>
+<div class="grid">
+    <div class="row cells2">
+        <div class="cell block-shadow-impact padding20 size-p40">
+            <form method="post" action="@Url.Action("ServerEdit", "Admin")" id="editServerForm" data-serverId="@id">
+
+                <div class="input-control text full-size" data-role="input">
+                    <label for="inputServername">Please enter servername</label>
+                    <input type="text" name="Servername" id="inputServername" value="@description">
+                </div>
+                <br />
+                <br />
+                <div class="input-control select full-size">
+                    <label for="selectServertype">Select server type</label>
+                    <select id="selectServertype" data-mode="@mode">
+                        <option value="0">Video Server</option>
+                        <option value="1">Backup Server</option>
+                        <option value="2">Analytics Server</option>
+                    </select>
+                </div>
+                <br />
+                <br />
+                <div class="input-control text full-size" data-role="input">
+                    <label for="inputIp">Please enter Server IP address</label>
+                    <input type="text" name="IP" id="inputIp" value="@ip">
+                </div>
+                <br />
+                <br />
+                <div class="input-control text full-size" data-role="input">
+                    <label for="inputConnectionstring">Please enter Database connection string</label>
+                    <input type="text" name="ConnectionString" id="inputConnectionstring" value="@connectionstring">
+                </div>
+                <br />
+                <br />
+                <div class="input-control text full-size" data-role="input">
+                    <label for="inputITVname">Please enter ITV server alias</label>
+                    <input type="text" name="ITVName" id="inputITVname" value="@itv">
+                </div>
+                <hr class="thin bg-grayLighter">
+
+                <div class="form-actions">
+                    <button type="submit" class="button success" id="buttonSubmit"><span class="mif-user-plus"></span> Apply</button>
+                    <button type="button" class="button link" id="cancel">Cancel</button>
+                </div>
+            </form>
+
+        </div>
+        <div class="padding20 cell size-p40 block-shadow-impact">
+            <div class="grid">
+                <div class="row cells2">
+                    <div class="cell size-p30">
+                        Roles available:
+                    </div>
+
+                    <div class="cell size-p70 block-shadow-impact listview "
+                         id="availableRoles" style="height: 8.5em; overflow-y:scroll;" data-type="role">
+                        @foreach (var role in Model.AvailableRoles)
+                        {
+                            <div class="list" draggable="true" id="@role.Id" data-type="role">
+                                <span class="list-icon mif-key"></span>
+                                <span class="list-title">@role.Name</span>
+                            </div>
+
+                        }
+
+
+                    </div>
+                </div>
+
+                <div class="row cells2">
+                    <div class="cell size-p30">
+                        Roles assigned:
+                    </div>
+
+                    <div class="cell size-p70 block-shadow-impact listview "
+                         id="assignedRoles" style="height: 8.5em; overflow-y:scroll;" data-type="role">
+                        @foreach (var role in Model.AssignedRoles)
+                        {
+                            <div class="list" draggable="true" id="@role.Id" data-type="role">
+                                <span class="list-icon mif-key"></span>
+                                <span class="list-title">@role.Name</span>
+                            </div>
+
+                        }
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

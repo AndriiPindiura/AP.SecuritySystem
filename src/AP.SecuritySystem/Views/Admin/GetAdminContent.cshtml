@@ -1,0 +1,23 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<h1 class="text-light">@ViewBag.Title<span class="@ViewBag.Icon place-right"></span></h1>
+<hr class="thin bg-grayLighter">
+<button class="button primary" onclick="pushMessage('info')"><span class="mif-plus"></span> Create...</button>
+<button class="button success" onclick="showmessage()"><span class="mif-play"></span> Start</button>
+<button class="button warning" onclick="pushMessage('warning')"><span class="mif-loop2"></span> Restart</button>
+<button class="button alert" onclick="pushMessage('alert')">Stop all machines</button>
+<hr class="thin bg-grayLighter">
+
+    @{
+// ViewBag.Title = "Home Page";
+        if (@ViewBag.Parameter < 0)
+        {
+            @await Component.InvokeAsync(@ViewBag.ViewComponent);
+            }
+            else
+            {
+            @await Component.InvokeAsync(@ViewBag.ViewComponent, @ViewBag.Parameter);
+        }
+    }
+

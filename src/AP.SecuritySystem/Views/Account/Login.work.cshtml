@@ -1,0 +1,133 @@
+﻿
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/account.css">
+
+    <script src='~/scripts/jquery.js'></script>
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script>
+        $(function () {
+            // constants
+            var SHOW_CLASS = 'show',
+                HIDE_CLASS = 'hide',
+                ACTIVE_CLASS = 'active';
+
+            $('.tabs').on('click', 'li a', function (e) {
+                e.preventDefault();
+                var $tab = $(this),
+                     href = $tab.attr('href');
+
+                $('.active').removeClass(ACTIVE_CLASS);
+                $tab.addClass(ACTIVE_CLASS);
+
+                $('.show')
+                   .removeClass(SHOW_CLASS)
+                   .addClass(HIDE_CLASS)
+                   .hide();
+
+                $(href)
+                  .removeClass(HIDE_CLASS)
+                  .addClass(SHOW_CLASS)
+                  .hide()
+                  .fadeIn(550);
+            });
+        });
+    </script>
+    <!-- Mobile Specific Metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="flat-form">
+            <ul class="tabs">
+                <li>
+                    <a href="#login" class="active">Login</a>
+                </li>
+                <!--<li>
+                    <a href="#register">Register</a>
+                </li>-->
+                <li>
+                    <a href="#reset">Reset Password</a>
+                </li>
+            </ul>
+            <div id="login" class="form-action show">
+                <h1>AP Security System authorize required!</h1>
+                <p>
+                    This resource contains private information.
+                    You must be authorized to continue.
+                </p>
+
+
+                <form method="post" action="~/Account/Login">
+                    @Html.ValidationSummary(true)
+                    @Html.AntiForgeryToken()
+                    <ul>
+                        <li>
+                            <input type="text" placeholder="Username" name="UserName" />
+                        </li>
+                        <li>
+                            <input type="password" placeholder="Password" name="Password" />
+                        </li>
+                        <li>
+                            <label for="RememberMe">remember me?</label>
+                            <input type="checkbox" name="RememberMe" placeholder="Remember me?" />
+                            <input type="submit" value="Login" class="button" />
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <!--/#login.form-action-->
+            <div id="register" class="form-action hide">
+                <h1>Register</h1>
+                <p>
+                    You should totally sign up for our super awesome service.
+                    It's what all the cool kids are doing nowadays.
+                </p>
+                <form>
+                    <ul>
+                        <li>
+                            <input type="text" placeholder="Username" />
+                        </li>
+                        <li>
+                            <input type="password" placeholder="Password" />
+                        </li>
+                        <li>
+                            <input type="submit" value="Sign Up" class="button" />
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <!--/#register.form-action-->
+            <div id="reset" class="form-action hide">
+                <h1>Reset Password</h1>
+                <p>
+                    To reset your password enter your email and your birthday
+                    and we'll send you a link to reset your password.
+                </p>
+                <form>
+                    <ul>
+                        <li>
+                            <input type="text" placeholder="Email" />
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Birthday" />
+                        </li>
+                        <li>
+                            <input type="submit" value="Send" class="button" />
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <!--/#register.form-action-->
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+﻿html, body {
+    height: 100%;
+}
+
+body {
+}
+
+.page-content {
+    padding-top: 3.125rem;
+    min-height: 100%;
+    height: 100%;
+}
+
+.table .input-control.checkbox {
+    line-height: 1;
+    min-height: 0;
+    height: auto;
+}
+
+.login-form {
+    width: 25rem;
+    height: 18.75rem;
+    position: fixed;
+    top: 50%;
+    margin-top: -9.375rem;
+    left: 50%;
+    margin-left: -12.5rem;
+    background-color: #ffffff;
+    opacity: 0;
+    -webkit-transform: scale(.8);
+    transform: scale(.8);
+    -moz-box-shadow: 5px 5px 5px rgba(255,255,255,0.6);
+    -webkit-box-shadow: 5px 5px 5px rgba(255,255,255,0.6);
+    box-shadow: 5px 5px 5px rgba(255,255,255,0.6);
+}
+
+@media screen and (max-width: 800px) {
+    #cell-sidebar {
+        flex-basis: 52px;
+        height: 100%;
+    }
+
+    #cell-content {
+        flex-basis: calc(100% - 52px);
+    }
+        
+}
+
+@media screen {
+    #divResult {
+        height: 100%;
+    }
+    .listview-outlook {
+        height: 75%;
+    }
+}

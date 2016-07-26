@@ -1,0 +1,14 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <a href="">@User.Identity.Name</a><a href="~/Account/SignOut">Sign Out</a>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

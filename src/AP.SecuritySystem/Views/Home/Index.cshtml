@@ -1,0 +1,202 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @using Microsoft.AspNet.Authorization
+    @inject IAuthorizationService _auth;
+// ViewBag.Title = "Home Page";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+
+    <link href="../css/metro.css" rel="stylesheet">
+    <link href="../css/metro-icons.css" rel="stylesheet">
+    <link href="../css/metro-responsive.css" rel="stylesheet">
+    <link href="../css/metro-schemes.css" rel="stylesheet">
+    <script src="../js/jquery.js"></script>
+    <script src="../js/metro.js"></script>
+
+</head>
+<body>
+
+
+    <div class="app-bar">
+        <!-- ЛОГО -->
+        <div class="app-bar-element place-left">
+            <a href="~/Home">
+                <img src="~/images/ap.png" style="height: 50px; opacity: 0.9;" />
+            </a>
+        </div>
+        <span class="app-bar-divider"></span>
+
+        <!-- МЕНЮ -->
+
+        <div class="app-bar-element place-left">
+            <a class="app-bar-element">
+                <span id="toggle-tiles-dropdown" class="mif-apps mif-2x"></span>
+            </a>
+
+            <div class="app-bar-drop-container"
+                 data-role="dropdown"
+                 data-toggle-element="#toggle-tiles-dropdown"
+                 data-no-close="false" style="width: 248px;">
+
+                <ul class="v-menu subdown">
+                    <li class="menu-title">AP Security System</li>
+                    <li><a href="#"><span class="mif-home icon"></span> Home</a></li>
+                    <li class="divider"></li>
+                    <li class="menu-title">Video subsystem</li>
+                    <li>
+                        <a href="#" class="dropdown-toggle"><span class="mif-eye icon"></span> Video Servers</a>
+                        <ul class="d-menu subdown" data-role="dropdown">
+                            <li class="menu-title">Select video server</li>
+                            <li><a href="#">Коллеги</a></li>
+                            <li><a href="#">Интересно</a></li>
+                            <li>
+                                <div class="item-block text-center">
+                                    <button class="square-button"><img class="icon" src="images/round.png"></button>
+                                    <button class="square-button"><img class="icon" src="images/location.png"></button>
+                                    <button class="square-button"><img class="icon" src="images/group.png"></button>
+                                </div>
+                            </li>
+                            <li class="active-container">
+                                <a href="#" class="dropdown-toggle">Еще...</a>
+                                <ul class="d-menu" data-role="dropdown">
+                                    <li><a href="#">Коллеги</a></li>
+                                    <li><a href="#">Интересно</a></li>
+                                    <li>
+                                        <div class="item-block text-center bg-grayLighter">
+                                            <button class="round-button"><img class="icon" src="images/round.png"></button>
+                                            <button class="round-button"><img class="icon" src="images/location.png"></button>
+                                            <button class="round-button"><img class="icon" src="images/group.png"></button>
+                                            <button class="round-button"><img class="icon" src="images/power.png"></button>
+                                        </div>
+                                    </li>
+                                    <li class="divider"></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#" class="dropdown-toggle"><span class="mif-film icon"></span> Backup Servers</a>
+                        <ul class="d-menu subdown" data-role="dropdown">
+                            <li class="menu-title">Select reserve backup server</li>
+                            <li><a href="#">Коллеги</a></li>
+                            <li><a href="#">Интересно</a></li>
+                            <li>
+                                <div class="item-block text-center">
+                                    <button class="square-button"><img class="icon" src="images/round.png"></button>
+                                    <button class="square-button"><img class="icon" src="images/location.png"></button>
+                                    <button class="square-button"><img class="icon" src="images/group.png"></button>
+                                </div>
+                            </li>
+                            <li class="active-container">
+                                <a href="#" class="dropdown-toggle">Еще...</a>
+                                <ul class="d-menu" data-role="dropdown">
+                                    <li><a href="#">Коллеги</a></li>
+                                    <li><a href="#">Интересно</a></li>
+                                    <li>
+                                        <div class="item-block text-center bg-grayLighter">
+                                            <button class="round-button"><img class="icon" src="images/round.png"></button>
+                                            <button class="round-button"><img class="icon" src="images/location.png"></button>
+                                            <button class="round-button"><img class="icon" src="images/group.png"></button>
+                                            <button class="round-button"><img class="icon" src="images/power.png"></button>
+                                        </div>
+                                    </li>
+                                    <li class="divider"></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li><a href="#"><span class="mif-drive-eta icon"></span> Analytics system</a></li>
+                    <li class="divider"></li>
+                    <li class="menu-title">Common</li>
+                    <li><a href="#"><span class="mif-user icon"></span> Profile</a></li>
+                    @if (await _auth.AuthorizeAsync(User, "Supervisor"))
+                    {
+                        <li><a href="~/Admin"><span class="mif-cog icon"></span> Admin</a></li>
+                    }
+                    <li><a href="#"><span class="mif-info icon"></span> About</a></li>
+                    <li><a href="~/Account/SignOut"><span class="mif-exit icon"></span> Exit</a></li>
+
+                </ul>
+
+                <!--
+                <div class="tile-container bg-white">
+                    <div class="tile-content iconic">
+                        <span class="icon mif-onedrive"></span>
+                    </div>
+                </div>
+                <div class="tile-small bg-yellow">
+                    <div class="tile-content iconic">
+                        <span class="icon mif-google"></span>
+                    </div>
+                </div>
+                <div class="tile-small bg-red">
+                    <div class="tile-content iconic">
+                        <span class="icon mif-facebook"></span>
+                    </div>
+                </div>
+                <div class="tile-small bg-green">
+                    <div class="tile-content iconic">
+                        <span class="icon mif-twitter"></span>
+                    </div>
+                </div>
+                    -->
+            </div>
+        </div>
+        
+        <!-- ЮЗЕР -->
+
+        <div class="app-bar-element place-right">
+            <a class="dropdown-toggle fg-white">
+                @User.Identity.Name <span class="mif-user "></span>
+            </a>
+            <div class="app-bar-drop-container place-right fg-dark" style="width: 220px;" data-role="dropdown" data-no-close="true">
+                <div class="padding20">
+                    <h2 class="text-light">User settings</h2>
+                    <ul class="unstyled-list fg-dark">
+                        <li><a class="fg-white1 fg-hover-yellow" href="">Profile</a></li>
+                        <li><a class="fg-white3 fg-hover-yellow" href="">Exit</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--
+            <div class="app-bar-drop-container bg-white fg-dark place-right"
+                 data-role="dropdown" data-no-close="true">
+                <div class="padding20">
+                    <form>
+                        <h4 class="text-light">Login to service...</h4>
+                        <div class="input-control text">
+                            <span class="mif-user prepend-icon"></span>
+                            <input type="text">
+                        </div>
+                        <div class="input-control text">
+                            <span class="mif-lock prepend-icon"></span>
+                            <input type="password">
+                        </div>
+                        <label class="input-control checkbox small-check">
+                            <input type="checkbox">
+                            <span class="check"></span>
+                            <span class="caption">Remember me</span>
+
+                        </label>
+                        <div class="form-actions">
+                            <button class="button">Login</button>
+                            <button class="button link">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+                -->
+        </div>
+    </div>
+
+
+
+</body>
+</html>

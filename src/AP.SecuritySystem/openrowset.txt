@@ -1,0 +1,1 @@
+﻿SERVER=10.23.10.228\SQLEXPRESS;database=Intellect;UID=video;PWD=P@ssw0rd1

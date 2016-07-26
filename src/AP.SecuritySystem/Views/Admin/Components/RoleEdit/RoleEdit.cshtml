@@ -1,0 +1,139 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model AP.SecuritySystem.Models.RoleModel
+    var action = "";
+    var id = "";
+    @if (Model.Role == null)
+    {
+        action = Url.Action("RoleCreate", "Admin");
+        <div class="input-control text" data-role="input">
+            <label for="roleName">Input role name:</label>
+            <input id="roleName" type="text" />
+            <!--
+            <span class="label">Input role name:</span>
+            <span class="informer">Input role name:</span>
+            <span class="placeholder">Input role name:</span>
+            <span class="icon mif-key"></span>-->
+        </div>
+
+    }
+    else
+    {
+        action = Url.Action("RoleEdit", "Admin");
+        id = Model.Role.Id;
+        <h1 class="text-light">Role: @Model.Role.Name<span class="icon mif-key"></span></h1>
+    }
+}
+<hr class="thin bg-grayLighter">
+
+
+<form method="post" action="@action" id="editRoleForm" data-roleId="@id">
+    <div class="grid">
+        <!--
+
+        <input type="text" style="border:none;" id="roleName" value="" readonly/> <input type="text" style="border:none;" id="roleName" />
+
+        <div class="row">
+            <div class="input-control modern text block-shadow-impact">
+                <input type="text" id="roleName" />
+            </div>
+
+        </div>
+            -->
+        <div class="row cells3">
+            <div class="padding10 cell size-p40 block-shadow-impact">
+                <div class="grid">
+                    <div class="row cells2">
+                        <div class="cell size-p30">
+                            Users available:
+                        </div>
+
+                        <div class="cell size-p70 block-shadow-impact listview "
+                             id="availableUsers" style="height: 8.5em; overflow-y:scroll;" data-type="user">
+                            @foreach (var user in Model.AvailableUsers)
+                            {
+                                <div class="list" draggable="true" id="@user.Id" data-type="user">
+                                    <span class="list-icon mif-key"></span>
+                                    <span class="list-title">@user.UserName</span>
+                                </div>
+
+                            }
+
+                        </div>
+                    </div>
+
+                    <div class="row cells2">
+                        <div class="cell size-p30">
+                            Users assigned:
+                        </div>
+
+                        <div class="cell size-p70 block-shadow-impact listview "
+                             id="assignedUsers" style="height: 8.5em; overflow-y:scroll;" data-type="user">
+                            @foreach (var user in Model.AssignedUsers)
+                            {
+                                <div class="list" draggable="true" id="@user.Id" data-type="user">
+                                    <span class="list-icon mif-key"></span>
+                                    <span class="list-title">@user.UserName</span>
+                                </div>
+
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="padding10 cell size-p40 block-shadow-impact">
+                <div class="grid">
+                    <div class="row cells2">
+                        <div class="cell size-p30">
+                            Servers available:
+                        </div>
+
+                        <div class="cell size-p70 block-shadow-impact listview "
+                             id="availableServers" style="height: 8.5em; overflow-y:scroll;" data-type="server">
+                            @foreach (var server in Model.AvailableServers)
+                            {
+                                <div class="list" draggable="true" id="@server.Id" data-type="server">
+                                    <span class="list-icon mif-key"></span>
+                                    <span class="list-title">@server.Description</span>
+                                </div>
+
+                            }
+
+                        </div>
+                    </div>
+
+                    <div class="row cells2">
+                        <div class="cell size-p30">
+                            Servers assigned:
+                        </div>
+
+                        <div class="cell size-p70 block-shadow-impact listview "
+                             id="assignedServers" style="height: 8.5em; overflow-y:scroll;" data-type="server">
+                            @foreach (var server in Model.AssignedServers)
+                            {
+                                <div class="list" draggable="true" id="@server.Id" data-type="server">
+                                    <span class="list-icon mif-key"></span>
+                                    <span class="list-title">@server.Description</span>
+                                </div>
+
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <hr class="thin bg-grayLighter">
+
+        <div class="form-actions row padding10">
+            <button type="submit" class="button success" id="buttonSubmit"><span class="mif-user-check"></span> Apply</button>
+            <button type="button" class="button link" id="cancel">Cancel</button>
+        </div>
+
+
+    </div>
+</form>

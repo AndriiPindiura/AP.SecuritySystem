@@ -1,0 +1,102 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+// ViewBag.Title = "Home Page";
+}
+@model AP.SecuritySystem.Models.UserModel
+<h1 class="text-light">Edit user<span class="mif-user-plus place-right"></span></h1>
+<hr class="thin bg-grayLighter">
+@Html.Hidden("userId", Model.User.Id)
+<form method="post" action="@Url.Action("UserEdit","Account")" id="editUserForm">
+    <div class="grid">
+        <div class="row cells2">
+            <div class="cell block-shadow-impact padding20 size-p40">
+
+                <div class="input-control text full-size" data-role="input">
+                    <label for="inputUsername">Please enter username</label>
+                    <input type="text" id="inputUsername" name="UserName" value="@Model.User.UserName" disabled>
+                    <!--<span class="label">You login</span>
+                    <span class="informer">Please enter you username</span>
+                    <span class="placeholder">Input username</span>
+                    <span class="icon mif-user"></span>-->
+
+                </div>
+                <br />
+                <br />
+
+                <div class="input-control text full-size" data-role="input">
+                    <label for="email">Please enter email</label>
+                    <input type="text" name="email" id="email" value="@Model.User.Email">
+                    <!--<span class="label">You login</span>
+                    <span class="informer">Please enter you email</span>
+                    <span class="placeholder">Input email</span>
+                    <span class="icon mif-mail"></span>-->
+
+                </div>
+                <button type="button" class="button link" id="passwordReset">Reset Password</button>
+                <hr class="thin bg-grayLighter">
+
+                <div class="form-actions row padding10">
+                    <button type="submit" class="button success yellow-bullet" id="buttonSubmit"><span class="mif-user-check"></span> Change</button>
+                    <button type="button" class="button link" id="cancel">Cancel</button>
+                </div>
+
+            </div>
+            <div class="padding20 cell size-p40 block-shadow-impact">
+                <div class="grid">
+                    <div class="row cells2">
+                        <div class="cell size-p30">
+                            Roles available:
+                        </div>
+
+                        <div class="cell size-p70 block-shadow-impact listview "
+                             id="available" style="height: 8.5em; overflow-y:scroll;" data-type="role">
+                            @foreach (var role in Model.AvailableRoles)
+                            {
+                                <div class="list" draggable="true" id="@role.Id" data-type="role">
+                                    <span class="list-icon mif-key"></span>
+                                    <span class="list-title">@role.Name</span>
+                                </div>
+
+                            }
+
+                        </div>
+                    </div>
+
+                    <div class="row cells2">
+                        <div class="cell size-p30">
+                            Roles assigned:
+                        </div>
+
+                        <div class="cell size-p70 block-shadow-impact listview "
+                             id="assigned" style="height: 8.5em; overflow-y:scroll;" data-type="role">
+                            @foreach (var role in Model.AssignedRoles)
+                            {
+                                <div class="list" draggable="true" id="@role.Id" data-type="role">
+                                    <span class="list-icon mif-key"></span>
+                                    <span class="list-title">@role.Name</span>
+                                </div>
+
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="dialog padding20 block-shadow-impact" data-role="dialog" id="resetDialog" data-close-button="true">
+    <h1>Reset password confirmation!</h1>
+    <p>
+        Are you sure you want to reset password for this users?
+
+    </p>
+
+    <button class="button block-shadow-impact">Reset</button>
+    <button type="button" class="button link" id="closeDialog">Cancel</button>
+
+</div>
+@Html.Hidden("resetUrl", Url.Action("ForgotPassword", "Account"))

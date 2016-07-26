@@ -1,0 +1,75 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Layout/_AdminListLayout.cshtml";
+    // ViewBag.Title = "Home Page";
+}
+@model AP.SecuritySystem.Models.AdminServerVCModel
+<h1 class="text-light">@Model.Header.Title<span class="@Model.Header.Icon place-right"></span></h1>
+<hr class="thin bg-grayLighter">
+<button class="button primary"><span class="mif-truck2"></span> Create...</button>
+<button class="button success"><span class="mif-cogs"></span> Change...</button>
+<!--<button class="button warning" onclick="pushMessage('warning')"><span class="mif-loop2"></span> Restart</button>-->
+<button class="button alert"><span class="mif-minus"></span> Remove...</button>
+@if (Model.Header.ServerType == 2)
+{
+    <button class="button warning"><span class="mif-list2"></span> Entries...</button>
+}
+<hr class="thin bg-grayLighter">
+<div class="listview-outlook" style="overflow-y: auto;" data-role="listview">
+    @{ var servers = Model.Servers.ToList();
+        foreach (var server in servers)
+        {    <div class="list">
+
+        <div class="list-content" id="@server.Id">
+            <span class="list-title">@server.Description (@server.Ip)</span>
+            <span class="list-subtitle">
+                @{
+                    var roles = "roles: ";
+                    foreach (var role in server.Roles)
+                    {
+                        try
+                        {
+                            roles += role.Role.Name + ",";
+                        }
+                        catch (Exception ex)
+                        {
+                            <text>@ex.Message</text>
+
+                        }
+                    }
+                }
+                <text>@roles.Remove(roles.Length - 1, 1)</text>
+            </span>
+
+            <span class="list-remark">
+                @{
+                    var entries = "entries: ";
+                    foreach (var entry in server.Entries)
+                    {
+                        entries += entry.Description + ",";
+                    }
+                    <text>@entries.Remove(entries.Length - 1, 1)</text>
+                }
+
+            </span>
+        </div>
+    </div>
+
+                    }
+    }
+
+</div>
+@Html.Hidden("editUrl", @Html.Raw(@Url.Action("ServerEdit", "Admin", new { id = "UID" })))
+@Html.Hidden("entryUrl", @Url.Action("EntryList", "Admin", new { id = "UID" }))
+@Html.Hidden("deleteUrl", Url.Action("ServerDelete", "Admin"))
+<div class="dialog padding20 alert" data-role="dialog" id="confirmDialog" data-close-button="true">
+    <h1>Delete confirmation!</h1>
+    <p>
+        Are you sure you want to delete this server, all history and entries assigned with it?
+
+    </p>
+    <button class="button alert block-shadow-error">Delete</button>
+</div>
+
